@@ -1,3 +1,4 @@
+//In MIDI, C4 is defined as 60, and each note afterwards is one after the previous one; C# is 61, D is 62, etc.
 var C4 = 60;
 
 //compendium of scales
@@ -5,13 +6,10 @@ var C4 = 60;
 var MajorScaleIntervals = [2,2,1,2,2,2,1,2];
 var MinorScaleIntervals = [2,1,2,2,2,1,2,2];
 
-
-function randomChoice(array){
-	return array[Math.floor(Math.random()*array.length)];
-}
+var CMajor = [60,62,64,65,67,69,71,72];
 
 function notesInScale(scaleStartNote, scaleIntervals){
-	//given a MIDI note and a set of intervals, return an array containing all the notes of the scale
+	//given a MIDI note and a set of intervals, return an array containing all the notes of the scale starting from scaleStartNote
 	var note = scaleStartNote || 70;
 	var notes = [];
 	for(var i=0;i<scaleIntervals.length;i++){
@@ -20,10 +18,6 @@ function notesInScale(scaleStartNote, scaleIntervals){
 	}
 	return notes;
 }
-
-
-var CMajor = [60,62,64,65,67,69,71,72];
-
 
 window.onload = function () {
 	MIDI.loadPlugin({
@@ -35,13 +29,15 @@ window.onload = function () {
 		onsuccess: function() {
 			MIDI.setVolume(0, 127);
 			MIDI.Player.stop();
-			
-			//play([C4,C4,[null,C4],[null,C4], C4,C4,[null,C4],[null,C4], [C4,C4],[C4,C4],C4,C4, C4,null,null,null],60,80,0);	//grand
 		}
 	});
 };
 
 function play(notes, bpm, velocity, swinginess){
+	//Function to play a specific representation of a song through MIDI.js
+	//notes is an array of quarter notes; if a given element is an array, though, treat the elements as subdivisions of a quarter note into equal smaller notes/rests. 
+	//null = rest, number = MIDI number.
+
 	//notes: an array of MIDI notes
 	//bpm: a number
 	//swinginess: 
@@ -51,7 +47,6 @@ function play(notes, bpm, velocity, swinginess){
 
 	var spb = 60 / bpm; //seconds per beat
 
-	//4 notes per beat, for now assuming all notes are quarter notes
 	var quarterDelayBetweenNotes = spb / 4; 
 
 	for(var i=0;i<notes.length;i++){
@@ -60,11 +55,6 @@ function play(notes, bpm, velocity, swinginess){
 		if(typeof notes[i] == "number"){
 
 			var noteStart = 1+i*quarterDelayBetweenNotes; //in seconds
-
-			//swing
-			//since it is currently assumed all notes are quarter notes, just delay every other note for now.
-			//todo: fix
-			if(i % 2 == 0)noteStart += swinginess;
 
 			var noteEnd = noteStart + 1*quarterDelayBetweenNotes //assumed all notes are quarter notes, so only held for 1x more quarterDelayBetweenNotes
 
