@@ -128,7 +128,7 @@ s = [B C# D E F# G# A B ]   <br>
 
 <button onclick="s = notesInScale(C4,MajorScaleIntervals); s = s.slice().splice(1).concat(s[0]); playExample([[s[4]-12,null],[null,s[4]-12],s[0],null,null,null,null,[null,s[0]],null,[s[2],s[4]],[null,s[0]+12],[null,s[6]],[null,s[5]],[null,s[4]],null,[null,s[2]],null,[s[4],s[3]],null,[null,s[1]],null,[s[2],s[1]],null,[null,s[2]],null,[s[1],s[0]],null])">Click to Play Green Greens in C Dorian</button></p>
 
-<button onclick="s = notesInScale(C4-3,MajorScaleIntervals); s = s.slice().splice(1).concat(s[0]); playExample([[s[4]-12,null],[null,s[4]-12],s[0],null,null,null,null,[null,s[0]],null,[s[2],s[4]],[null,s[0]+12],[null,s[6]],[null,s[5]],[null,s[4]],null,[null,s[2]],null,[s[4],s[3]],null,[null,s[1]],null,[s[2],s[1]],null,[null,s[2]],null,[s[1],s[0]],null])">Click to Play Green Greens in A Dorian</button></p>
+<button onclick="s = notesInScale(C4-3,MajorScaleIntervals); s = s.slice().splice(1).concat(s[0]); playExample([[s[4]-12,null],[null,s[4]-12],s[0],null,null,null,null,[null,s[0]],null,[s[2],s[4]],[null,s[0]+12],[null,s[6]],[null,s[5]],[null,s[4]],null,[null,s[2]],null,[s[4],s[3]],null,[null,s[1]],null,[s[2],s[1]],null,[null,s[2]],null,[s[1],s[0]],null])">Click to Play Green Greens in B Dorian</button></p>
 
 <button onclick="s = notesInScale(C4-3,MajorScaleIntervals); playExample([[s[4]-12,null],[null,s[4]-12],s[0],null,null,null,null,[null,s[0]],null,[s[2],s[4]],[null,s[0]+12],[null,s[6]],[null,s[5]],[null,s[4]],null,[null,s[2]],null,[s[4],s[3]],null,[null,s[1]],null,[s[2],s[1]],null,[null,s[2]],null,[s[1],s[0]],null])">Click to Play Green Greens in C major, for reference</button></p> <br>
 
@@ -173,11 +173,13 @@ s[5]s[6]&nbsp;&nbsp;&nbsp;s[7]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s[1]&nbsp;&nbsp;&nbs
 
 <sub>By the way, <a href="https://www.youtube.com/watch?v=ufjH_M7ldi8">here's some boss music featuring green greens in a minor key at 0:05 to 0:12!</a></sub> <br><br>
 
-<p>Notice how ominous it sounds! Because the intervals of the scale are all different, and the song is using a key's intervals, A minor and C major don't sound the same. To transpose a major-key song into a natural minor, for example, first figure out what key it belongs to. Then, for all i, swap out the intervals in your scale s[i] for some minor intervals, and replay the notes. Lowering the s[2], s[6], and s[7] notes will do exactly that - and then al you need to do is play. </p>
+<p>Notice how ominous it sounds in A minor! Because the intervals of the scale are all different, and the intervals start from the root note of the scale (A and C, respectively), A minor and C major don't sound the same. Start from C? C major. Start from A? A minor.</p>
+
+<p>You can use this technique to transpose any song into any key. To transpose a major-key song into a natural minor, for example, first figure out what key (or keys) it belongs to. Then, for all notes, swap out the intervals in your scale s[i] for some minor intervals, and play the appropriate notes from that new scale. Lowering the s[2], s[6], and s[7] notes, for example, will transpose from a major key to the same key, but in minor - and then all you need to do is play. </p>
 
 <p><sub>By the way, every single major scale has a "relative minor" scale that uses the exact same pitches - just count down 3 notes from s[1] to find the next s[1]. F major has a relative minor of D minor.</sub></p>
 
-<p>In the end, the difference between A Minor and C Major is that one is a major scale when you start on C, and one is a minor scale when you start on A - and they're not the same thing because the intervals are all different relative to those starting notes. Think about a melody as a list of indices of a scale, and hopefully music will seem a bit less insane.</p>
+<p>In the end, the difference between A Minor and C Major is that one is a major scale when you start on C, and one is a minor scale when you start on A - and they're not the same thing because the intervals are relative to those starting notes. Think about a melody as a list of indices of a scale, and hopefully music will seem a bit less insane.</p>
 
 
 <br><br><br><br><br><br>
