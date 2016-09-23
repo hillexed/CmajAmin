@@ -1,0 +1,133 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<title>A note on Leray's theme</title>
+
+		<style>
+		body{
+			background-color: #ffdddd;
+			line-height:1.2em;
+		}
+
+		button{
+			value: "Click me!";
+		}
+
+		code{
+			background-color: rgba(0,0,0,0.1);
+			margin-top: 3em;
+			margin-bottom: 3em;
+		}
+		red{
+			color: #cc0000;
+			font-weight: bold;
+		}
+		lred{
+			color: #aa5555;
+			font-weight: bold;
+		}
+		blue{
+			color: #3333cc;
+			font-weight: bold;
+		}
+		lblu{
+			color: #3388aa;
+			font-weight: bold;
+		}
+		grn{
+			color: #00cc00;
+			font-weight: bold;
+		}
+		lgrn{
+			color: #88aa88;
+			font-weight: bold;
+		}
+		</style>
+	</head>
+	<body>
+	<script src="MIDI.min.js"></script>
+	<script src="Base64binary.js"></script>
+
+	<script src="main.js"></script>
+
+<p>I was listening to Leray's Theme when I noticed something: the bass didn't seem to match up with the melody. Sure, it was in the same key, but the notes of the bass usually change from measure to measure to form chords along with the melody, while this bass didn't.</p>
+
+<button onclick="s = notesInScale(C4+5,MinorScaleIntervals); playExample([s[3],s[5],s[4],s[3],s[2],null,s[2],s[4],s[3],s[2],s[1],null,s[1],s[3],s[2],s[1],s[0],null,s[0],s[6]-12,s[1],s[0]])">Click to Play the part of Leray's theme that caught my attention</button></p>
+
+<p>Without any bass, kind of feels like it's a resolution, doesn't it? The most common type of resolution is V->I, <a href="https://en.wikipedia.org/wiki/Cadence_%28music%29#Authentic_cadence">known as an authentic cadence</a>. I wonder if the notes spell out something like that - if so, maybe the bass could also use notes from a V chord to make the song sound better via the magic of chord progressions.</p>
+
+<p>To find the notes in an I chord we can go up from the first note of the scale, F, and go up by two keys in the scale to get F-A-C. However, the note A isn't one of the notes in the F minor scale, so we might be better off using an i chord instead (F-A♭-C) since all those notes are in F minor. Similarly, we can start from the 5th note in F minor (that's C) and go up by two notes again to get the keys in the V chord: C-E-G.  </p>
+
+<p>Let's look at the notes that are played, splitting them up into 4 sections just for the sake of convenience:</p>
+
+<code>
+B♭-D♭-C-B♭-A♭ (rest) A♭-C-B♭-A♭-G (rest) G-B♭-A♭-G-F (rest) F-E♭-G-F<br>
+</code>
+<p>Let's look at the last two parts and see if the notes fit an i chord. We're in an F minor key, so an i chord will be a minor chord starting on the first note of the key: an F minor chord. I'll color the notes in that chord (also known as "chord notes" - in this case, <blue>F, A♭, C</blue>) for convenience because writing this as HTML has its perks. </p>
+
+<code>
+B♭-D♭-C-B♭-A♭ (rest) A♭-C-B♭-A♭-G (rest) G-B♭-<blue>A♭</blue>-G-<blue>F</blue> (rest) <blue>F</blue>-E♭-G-<blue>F</blue><br></code>
+
+<p>Huh, that looks okay, but two notes out of four isn't very convincing. What if I also color in the notes that are exactly one away from a note in F minor? How about this nice <lblu>light blue</lblu> color?</p>
+
+<code>
+B♭-D♭-C-B♭-A♭ (rest) A♭-C-B♭-A♭-G (rest) <lblu>G</lblu>-<lblu>B♭</lblu>-<blue>A♭</blue>-<lblu>G</lblu>-<blue>F</blue> (rest) <blue>F</blue>-<lblu>E♭</lblu>-<lblu>G</lblu>-<blue>F</blue><br>
+</code>
+
+<sub>Note that the <lblu>G</lblu> is one away from the <blue>C</blue> in the i chord!</sub>
+
+<p>That's interesting - if we choose to interpret the last two chunks as an i chord, the song seems to pass from blue note to blue note, occasionally passing through the light blue notes which are one away from a blue note. </p>
+
+<p>That's not a coincidence - I chose an i chord because it fit the notes, not the other way around. But you can almost always choose chords to harmonize a melody if you look at where the melody adds emphasis or jumps. These light blue notes are called <b>neighboring tones</b>, and they sound similar enough to chord notes that they sound good together. You can almost always find a chord that ensures nearly every note is either a <blue>chord note</blue> or a <lblu>neighboring tone</lblu> per measure or so of a melody. In this case, I noticed that the melody in the 2nd-to-last part pauses momentarily on F, and A♭ was also a part of the melody, so I chose a chord containing F and A♭: the i chord of our F minor scale.</p>
+
+<p>Let's do the same for the second part of that song! With the notes A♭, C, B♭ and G, I see two choices of chord that would get every note: either an A♭ chord, containing A♭, C, and E♭:</p>
+<red>A♭-</red><red>C</red>-<lred>B♭</lred>-<red>A♭</red>-<lred>G</lred> 
+
+<button onclick="s = notesInScale(C4+5,MinorScaleIntervals); playExampleWithBass([s[2],s[4],s[3],s[2],s[1]],[[s[2]-12,s[4]-12,s[6]-12]]);">Click to Play part 2 harmonized to an A♭ chord</button></p>
+
+<p>or a C minor chord, containing C, E♭, and G: </p>
+
+<lred>A♭-</lred><red>C</red>-<lred>B♭</lred>-<lred>A♭</lred>-<red>G</red>
+
+<button onclick="s = notesInScale(C4+5,MinorScaleIntervals); playExampleWithBass([s[2],s[4],s[3],s[2],s[1]],[[s[4]-12,s[6]-12,s[1]]]);">Click to Play part 2 harmonized to a Cm chord</button></p>
+
+<p>Is there a definitive reason to choose one chord over the other? Not really! They're pretty similar-sounding (because they share 2/3 notes!), and music is an art form, after all, and you can go with whatever sounds good. However, in the context of our F minor scale, an A♭ would be an III chord, while a Cm would be a v chord. We're also choosing between the chord progressions III->I and V->i. V->i is a common resolution, so I'll pick Cm to harmonize that section, but it's completely up to you.</p>
+
+<p>Finally, there's that one section at the beginning, with the notes B♭-D♭-C-B♭-A♭. To make every note either a chord note or a neighboring tone, we could either use A♭ major again, which has A♭, C, E♭:</p>
+
+<lgrn>B♭</lgrn>-<lgrn>D♭</lgrn>-<grn>C</grn>-<lgrn>B♭</lgrn>-<grn>A♭</grn>
+
+<p>or we could use a B♭ minor chord, with B♭,D♭, and F:</p>
+
+<grn>B♭</grn>-<grn>D♭</grn>-<lgrn>C</lgrn>-<grn>B♭</grn>-<lgrn>A♭</lgrn>
+
+<p>B♭m would be an iv chord, forming an iv->v->i progression, while A♭ would make an III->v->i progression. Wait a minute; that's a <a href="https://en.wikipedia.org/wiki/IV-V-I_progression">common chord progression!</a> Let's use B♭m here, then - there's a reason it's so common, and that's because it sounds good. </p>
+
+<p>Now let's listen to how the entire thing sounds if we use these chords: </p>
+<code>
+<grn>B♭</grn>-<grn>D♭</grn>-<lgrn>C</lgrn>-<grn>B♭</grn>-<lgrn>A♭</lgrn>(rest) <lred>A♭-</lred><red>C</red>-<lred>B♭</lred>-<lred>A♭</lred>-<red>G</red> (rest) <lblu>G</lblu>-<lblu>B♭</lblu>-<blue>A♭</blue>-<lblu>G</lblu>-<blue>F</blue> (rest) <blue>F</blue>-<lblu>E♭</lblu>-<lblu>G</lblu>-<blue>F</blue><br><br>
+iv&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;<br>
+</code>
+
+<button onclick="s = notesInScale(C4+5,MinorScaleIntervals); playExampleWithBass([s[3],s[5],s[4],s[3],s[2],null,s[2],s[4],s[3],s[2],s[1],null,s[1],s[3],s[2],s[1],s[0],null,s[0],s[6]-12,s[1],s[0]],[[s[3]-12,s[5]-12,s[0]],null,null,null,null,null,[s[4]-12,s[6]-12,s[1]],null,null,null,null,null,[s[0]-12,s[2]-12,s[4]],null,null,null,null,null,[s[0]-12,s[2]-12,s[4]]])">Click to Play accompanied by our chosen chords! iv-v-i-i</button></p>
+
+<p>What you're doing in Leray's theme (and in your other compositions, I think) is leaving the bass separate from the right hand - but since that bass was in F minor without regard for chords, you essentially played i throughout the entire thing in your left hand:</p>
+
+<button onclick="s = notesInScale(C4+5,MinorScaleIntervals); playExampleWithBass([s[3],s[5],s[4],s[3],s[2],null,s[2],s[4],s[3],s[2],s[1],null,s[1],s[3],s[2],s[1],s[0],null,s[0],s[6]-12,s[1],s[0]],[[s[0]-12,s[2]-12,s[4]],null,null,null,null,null,[s[0]-12,s[2]-12,s[4]],null,null,null,null,null,[s[0]-12,s[2]-12,s[4]],null,null,null,null,null,[s[0]-12,s[2]-12,s[4]]])">Click to Play what you did: i-i-i-i</button></p>
+
+It works, and it sounds good, but it isn't as musically interesting as if you try to vary the chords to match the melody. I notice in a lot of your songs there doesn't seem to be an overarching chord progression within a key, and that's completely OK! But adding a chord progression can really change the feel of a song and make it sound much better.
+
+To summarize the method above:
+<ul>
+	<li>Make a melody</li>
+	<li>For each measure / chunk of time, find a chord that will make most notes in the melody either <blue>chord notes</blue> or <lblu>neighboring tones</lblu>. Sometimes you can even just pick and choose notes that are two keys away, like C and E, and then add a third note to form a triad.</li>
+	<li>Make the other instruments also play notes from your chosen chord in that measure</li>
+	<li>Enjoy the song!
+</ul>
+
+<p>This spiraled a bit out of control from the small writeup I intended it to be, but hopefully at least some of this is sane. </p>
+
+<p>@hillexed</p>
+
+	</body>
+</html>
