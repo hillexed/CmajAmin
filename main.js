@@ -4,7 +4,7 @@ var C4 = 60;
 //compendium of scales
 //Assumed that the beginning and end are both the same note
 var MajorScaleIntervals = [2,2,1,2,2,2,1,2];
-var MinorScaleIntervals = [2,1,2,2,2,1,2,2];
+var MinorScaleIntervals = [2,1,2,2,1,2,2,2];
 
 var CMajor = [60,62,64,65,67,69,71,72];
 
@@ -78,5 +78,21 @@ function play(notes, bpm, velocity, swinginess){
 function playExample(notes){
 	MIDI.Player.stop();
 	play(notes,60,80,0);
+	MIDI.Player.start();
+}
+function playExampleWithBass(notes,bassNotes){
+	MIDI.Player.stop();
+	play(notes,60,80,0);
+
+	var bpm = 60;
+	var spb = 60 / bpm; //seconds per beat
+	var quarterDelayBetweenNotes = spb / 4; 
+	for(var i=0;i<bassNotes.length;i++){
+		if(bassNotes[i] !== null){
+			console.log(bassNotes[i]);
+			MIDI.chordOn(0, bassNotes[i], 80, i * quarterDelayBetweenNotes + 1);
+			MIDI.chordOff(0, bassNotes[i], 80, i * quarterDelayBetweenNotes + 3);
+		}
+	}	
 	MIDI.Player.start();
 }
